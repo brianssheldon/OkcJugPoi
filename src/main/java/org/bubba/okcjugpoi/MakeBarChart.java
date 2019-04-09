@@ -42,6 +42,8 @@ public class MakeBarChart {
         /* Loop through worksheet data and populate bar chart dataset */
         String chart_label = "a";
         Number chart_data = 0;
+        int x = 0;
+        
         while (rowIterator.hasNext()) {
             //Read Rows from Excel document
             Row row = rowIterator.next();
@@ -59,7 +61,10 @@ public class MakeBarChart {
             /* Add data to the data set */
  /* We don't have grouping in the bar chart, so we put them in fixed group */
             my_bar_chart_dataset.addValue(chart_data.doubleValue(), "Marks", chart_label);
+            x++;
+            if(x > 1) break;
         }
+        
         /* Create a logical chart object with the chart data collected */
         JFreeChart BarChartObject = ChartFactory.createBarChart("Subject Vs Marks", "Subject", "Marks", my_bar_chart_dataset, PlotOrientation.VERTICAL, true, true, false);
         /* Dimensions of the bar chart */

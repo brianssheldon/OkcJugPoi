@@ -5,6 +5,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Random;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -24,7 +26,10 @@ public class PoiUno {
         //Cell defines an Excel cell addressed in reference to a row.
         XSSFWorkbook workbook = dosomethingfun();
         makeABunchOfData(workbook, "A Bunch Of Data");
-
+        
+        MakeBarChart makeBarChart = new MakeBarChart();
+        makeBarChart.makeBarChartPlease(workbook);
+        
         try {
             FileOutputStream outputStream = new FileOutputStream("File1.xls");
             workbook.write(outputStream);
@@ -82,15 +87,33 @@ public class PoiUno {
     private void makeABunchOfData(XSSFWorkbook workbook, String sheetName) {
 
         XSSFSheet sheet = workbook.createSheet(sheetName);
+        workbook.setActiveSheet(workbook.getSheetIndex(sheetName));
         Random r = new Random();
 
-        for (int i = 0; i < 50; i++) {
+        Row row = sheet.createRow(0);
+        Cell cell = row.createCell(0);
 
-            Row row = sheet.createRow(i);
+        CellStyle cellStyle = cell.getCellStyle();
+        cellStyle.setAlignment(HorizontalAlignment.CENTER);
+
+        for (int j = 0; j < 15; j++) {
+            String x = String.valueOf((char) (j + 65));
+            x += x;
+            x += x;
+            cell = row.createCell(j);
+            cell.setCellValue(x);
+            cell.setCellStyle(cellStyle);
+
+        }
+
+        for (int i = 1; i < 50; i++) {
+
+            row = sheet.createRow(i);
 
             for (int j = 0; j < 15; j++) {
-                Cell cell = row.createCell(j);
+                cell = row.createCell(j);
                 cell.setCellValue(new Random().nextInt(101 + 1));
+                cell.setCellStyle(cellStyle);
             }
         }
 
