@@ -29,6 +29,7 @@ public class PoiUno {
         
         MakeBarChart makeBarChart = new MakeBarChart();
         makeBarChart.makeBarChartPlease(workbook);
+        makeBarChart.makeBarChartPlease2(workbook);
         
         try {
             FileOutputStream outputStream = new FileOutputStream("File1.xls");
