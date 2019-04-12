@@ -12,6 +12,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class PoiUno {
+    public static final String A__BUNCH__OF__DATA = "A Bunch Of Data";
 
     public void makeMeASpreadsheet() {
 
@@ -25,11 +26,14 @@ public class PoiUno {
         //Row defines an Excel row
         //Cell defines an Excel cell addressed in reference to a row.
         XSSFWorkbook workbook = dosomethingfun();
-        makeABunchOfData(workbook, "A Bunch Of Data");
+        makeABunchOfData(workbook, A__BUNCH__OF__DATA);
         
         MakeBarChart makeBarChart = new MakeBarChart();
         makeBarChart.makeBarChartPlease(workbook);
         makeBarChart.makeBarChartPlease2(workbook);
+        
+        MakeSomeFormulas makeSomeFormulas = new MakeSomeFormulas();
+        makeSomeFormulas.makeSomeFormulasForMe(workbook);
         
         try {
             FileOutputStream outputStream = new FileOutputStream("File1.xls");
@@ -53,6 +57,12 @@ public class PoiUno {
             {"char", "Primitive", 1},
             {"String", "Non-Primitive", "No fixed size"}
         };
+        
+        sheet.setColumnWidth(0, 5000);
+        sheet.setColumnWidth(1, 5000);
+        sheet.setColumnWidth(2, 5000);
+//        CellStyle cellStyle = sheet.createRow(22).createCell(0).getCellStyle();
+//        cellStyle.setce;
 
         int rowNum = 0;
         System.out.println("Creating excel");

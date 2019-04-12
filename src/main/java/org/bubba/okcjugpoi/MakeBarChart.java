@@ -164,7 +164,7 @@ public class MakeBarChart {
                 System.err.println("aaaaa" + chart_label + " " + chart_data);
             }
             /* Add data to the data set */
-            /* We don't have grouping in the bar chart, so we put them in fixed group */
+ /* We don't have grouping in the bar chart, so we put them in fixed group */
             CategoryAxis categoryAxis = new CategoryAxis3D((chart_label + " " + chart_data.doubleValue()));
             categoryAxis.setCategoryLabelPositions(CategoryLabelPositions.UP_45);
             categoryAxis.setLabel(chart_label + " " + chart_data);
@@ -174,7 +174,8 @@ public class MakeBarChart {
 
         /* Create a logical chart object with the chart data collected */
         JFreeChart barChartObject = ChartFactory.createBarChart("Subject Vs Marks", "Subject", "Marks", my_bar_chart_dataset, PlotOrientation.VERTICAL, true, true, false);
-        barChartObject.getCategoryPlot().getDomainAxis().setCategoryLabelPositions(CategoryLabelPositions.DOWN_45); //http://www.java2s.com/Code/Java/Chart/JFreeChartDualAxisDemo.htm
+//        barChartObject.getCategoryPlot().getDomainAxis().setCategoryLabelPositions(CategoryLabelPositions.DOWN_45); //http://www.java2s.com/Code/Java/Chart/JFreeChartDualAxisDemo.htm
+//        barChartObject.getCategoryPlot().getDomainAxis().setCategoryLabelPositions(CategoryLabelPositions.UP_45); //http://www.java2s.com/Code/Java/Chart/JFreeChartDualAxisDemo.htm
 
         int width = 640;
         int height = 480;
