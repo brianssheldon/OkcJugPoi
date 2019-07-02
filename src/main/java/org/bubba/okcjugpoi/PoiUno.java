@@ -16,8 +16,6 @@ public class PoiUno {
 
     public void makeMeASpreadsheet() {
 
-        System.err.println("aaaaaaa " + this.getClass().getName() + " bbbbb");
-
         //https://www.mkyong.com/java/apache-poi-reading-and-writing-excel-file-in-java/
         //HSSF is prefixed before the class name to indicate operations related to a Microsoft Excel 2003 file.
         //XSSF is prefixed before the class name to indicate operations related to a Microsoft Excel 2007 file or later.
@@ -25,7 +23,9 @@ public class PoiUno {
         //HSSFSheet and XSSFSheet are classes which act as an Excel Worksheet
         //Row defines an Excel row
         //Cell defines an Excel cell addressed in reference to a row.
+        
         XSSFWorkbook workbook = dosomethingfun();
+        
         makeABunchOfData(workbook, A__BUNCH__OF__DATA);
         
         MakeBarChart makeBarChart = new MakeBarChart();
@@ -50,7 +50,7 @@ public class PoiUno {
         XSSFWorkbook workbook = new XSSFWorkbook();
         XSSFSheet sheet = workbook.createSheet("Datatypes in Java");
         Object[][] datatypes = {
-            {"Datatype", "Type", "Size(in bytes)"},
+            {"xxxxxx Datatype xxxxxxx", "Type", "Size(in bytes)"},
             {"int", "Primitive", 2},
             {"float", "Primitive", 4},
             {"double", "Primitive", 8},
@@ -58,11 +58,9 @@ public class PoiUno {
             {"String", "Non-Primitive", "No fixed size"}
         };
         
-        sheet.setColumnWidth(0, 5000);
+//        sheet.setColumnWidth(0, 5000);
         sheet.setColumnWidth(1, 5000);
         sheet.setColumnWidth(2, 5000);
-//        CellStyle cellStyle = sheet.createRow(22).createCell(0).getCellStyle();
-//        cellStyle.setce;
 
         int rowNum = 0;
         System.out.println("Creating excel");
@@ -82,16 +80,6 @@ public class PoiUno {
             }
         }
 
-//        try {
-//            FileOutputStream outputStream = new FileOutputStream("File1.xls");
-//            workbook.write(outputStream);
-//            workbook.close();
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-        System.out.println("Done");
         return workbook;
     }
 
@@ -114,7 +102,6 @@ public class PoiUno {
             cell = row.createCell(j);
             cell.setCellValue(x);
             cell.setCellStyle(cellStyle);
-
         }
 
         for (int i = 1; i < 50; i++) {
@@ -127,6 +114,5 @@ public class PoiUno {
                 cell.setCellStyle(cellStyle);
             }
         }
-
     }
 }

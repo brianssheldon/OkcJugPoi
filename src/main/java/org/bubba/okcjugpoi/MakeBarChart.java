@@ -141,8 +141,8 @@ public class MakeBarChart {
         DefaultCategoryDataset my_bar_chart_dataset = new DefaultCategoryDataset();
 
         /* We have to load bar chart data now */
- /* Begin by iterating over the worksheet*/
- /* Create an Iterator object */
+        /* Begin by iterating over the worksheet*/
+        /* Create an Iterator object */
         Iterator<Row> rowIterator = dataSheet.iterator();
         /* Loop through worksheet data and populate bar chart dataset */
         String chart_label = "a";
@@ -161,10 +161,9 @@ public class MakeBarChart {
                 } else if (cell.getCellType().equals(CellType.STRING)) {
                     chart_label = cell.getStringCellValue();
                 }
-                System.err.println("aaaaa" + chart_label + " " + chart_data);
             }
             /* Add data to the data set */
- /* We don't have grouping in the bar chart, so we put them in fixed group */
+            /* We don't have grouping in the bar chart, so we put them in fixed group */
             CategoryAxis categoryAxis = new CategoryAxis3D((chart_label + " " + chart_data.doubleValue()));
             categoryAxis.setCategoryLabelPositions(CategoryLabelPositions.UP_45);
             categoryAxis.setLabel(chart_label + " " + chart_data);
@@ -174,7 +173,7 @@ public class MakeBarChart {
 
         /* Create a logical chart object with the chart data collected */
         JFreeChart barChartObject = ChartFactory.createBarChart("Subject Vs Marks", "Subject", "Marks", my_bar_chart_dataset, PlotOrientation.VERTICAL, true, true, false);
-//        barChartObject.getCategoryPlot().getDomainAxis().setCategoryLabelPositions(CategoryLabelPositions.DOWN_45); //http://www.java2s.com/Code/Java/Chart/JFreeChartDualAxisDemo.htm
+        barChartObject.getCategoryPlot().getDomainAxis().setCategoryLabelPositions(CategoryLabelPositions.DOWN_45); //http://www.java2s.com/Code/Java/Chart/JFreeChartDualAxisDemo.htm
 //        barChartObject.getCategoryPlot().getDomainAxis().setCategoryLabelPositions(CategoryLabelPositions.UP_45); //http://www.java2s.com/Code/Java/Chart/JFreeChartDualAxisDemo.htm
 
         int width = 640;
@@ -184,7 +183,7 @@ public class MakeBarChart {
         /* We don't want to create an intermediate file. So, we create a byte array output stream 
                 and byte array input stream
                 And we pass the chart data directly to input stream through this */
- /* Write chart as PNG to Output Stream */
+        /* Write chart as PNG to Output Stream */
         ByteArrayOutputStream chart_out = new ByteArrayOutputStream();
 
         try {
