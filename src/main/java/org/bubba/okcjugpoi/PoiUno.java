@@ -30,10 +30,13 @@ public class PoiUno {
         
         MakeBarChart makeBarChart = new MakeBarChart();
         makeBarChart.makeBarChartPlease(workbook);
-        makeBarChart.makeBarChartPlease2(workbook);
+//        makeBarChart.makeBarChartPlease2(workbook);
         
         MakeSomeFormulas makeSomeFormulas = new MakeSomeFormulas();
         makeSomeFormulas.makeSomeFormulasForMe(workbook);
+        
+        DualAxisChart dualAxisChart = new DualAxisChart("Dual axis chart");
+        dualAxisChart.makeDualAxisChart(workbook);
         
         try {
             FileOutputStream outputStream = new FileOutputStream("File1.xls");
