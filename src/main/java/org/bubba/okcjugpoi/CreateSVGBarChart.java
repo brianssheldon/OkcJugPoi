@@ -12,9 +12,11 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import org.apache.poi.ss.usermodel.ClientAnchor;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFClientAnchor;
 import org.apache.poi.xssf.usermodel.XSSFDrawing;
 import org.apache.poi.xssf.usermodel.XSSFPicture;
+import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jfree.chart.ChartFactory;
@@ -34,16 +36,21 @@ import org.jfree.graphics2d.svg.SVGUtils;
 
 public class CreateSVGBarChart {
 
-    public CreateSVGBarChart() {
-    }
+    public CreateSVGBarChart() {}
 
     public void makeChart(XSSFWorkbook my_workbook) {
+        
+        XSSFSheet dataSheet = my_workbook.getSheet("A Bunch Of Data");
         XSSFSheet my_sheet = my_workbook.createSheet("SVG Bar Chart");
-        JFreeChart chart = createChart(createDataset());
+        
+        JFreeChart chart = createChart(createDataset(dataSheet));
+        
         SVGGraphics2D g2 = new SVGGraphics2D(600, 400);
         Rectangle r = new Rectangle(0, 0, 600, 400);
         chart.draw(g2, r);
+        
         File f = new File("SVGBarChartDemo1.svg");
+        
         try {
             SVGUtils.writeToSVG(f, g2.getSVGElement());
         } catch (IOException ex) {
@@ -53,11 +60,9 @@ public class CreateSVGBarChart {
         int width = 640;
         int height = 480;
 
-        ByteArrayOutputStream chart_out = new ByteArrayOutputStream();
         byte[] imageInByte = null;
 
         try {
-//            ChartUtilities.writeChartAsPNG(chart_out, barChartObject, width, height);
             BufferedImage bi = chart.createBufferedImage(width, height);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ImageIO.write(bi, "png", baos);
@@ -68,13 +73,6 @@ public class CreateSVGBarChart {
             Logger.getLogger(MakeBarChart.class.getName()).log(Level.SEVERE, null, ex);
         }
         int my_picture_id = my_workbook.addPicture(imageInByte, Workbook.PICTURE_TYPE_PNG);
-
-        try {
-            /* we close the output stream as we don't need this anymore */
-            chart_out.close();
-        } catch (IOException ex) {
-            Logger.getLogger(MakeBarChart.class.getName()).log(Level.SEVERE, null, ex);
-        }
 
         /* Create the drawing container */
         XSSFDrawing drawing = my_sheet.createDrawingPatriarch();
@@ -89,17 +87,34 @@ public class CreateSVGBarChart {
         my_picture.resize();
     }
 
-    private CategoryDataset createDataset() {
+    private CategoryDataset createDataset(XSSFSheet sheet) {
         DefaultStatisticalCategoryDataset dataset
                 = new DefaultStatisticalCategoryDataset();
-        dataset.add(10.0, 2.4, "Row 1", "Column 1");
-        dataset.add(15.0, 4.4, "Row 1", "Column 2");
-        dataset.add(13.0, 2.1, "Row 1", "Column 3");
-        dataset.add(7.0, 1.3, "Row 1", "Column 4");
-        dataset.add(22.0, 2.4, "Row 2", "Column 1");
-        dataset.add(18.0, 4.4, "Row 2", "Column 2");
-        dataset.add(28.0, 2.1, "Row 2", "Column 3");
-        dataset.add(17.0, 1.3, "Row 2", "Column 4");
+
+        for (int i = 0; i < 5; i++) {
+
+            XSSFCell columnHeading = sheet.getRow(0).getCell(i);
+
+            XSSFCell cell1 = sheet.getRow(1).getCell(i);
+            XSSFCell cell2 = sheet.getRow(2).getCell(i);
+
+            dataset.add(
+                    cell1.getNumericCellValue(),
+                    cell2.getNumericCellValue(),
+                    "Row 1",
+                    columnHeading.getStringCellValue());
+            
+            cell1 = sheet.getRow(3).getCell(i);
+            cell2 = sheet.getRow(4).getCell(i);
+
+            dataset.add(
+                    cell1.getNumericCellValue(),
+                    cell2.getNumericCellValue(),
+                    "Row 2",
+                    columnHeading.getStringCellValue());
+
+        }
+
         return dataset;
     }
 
