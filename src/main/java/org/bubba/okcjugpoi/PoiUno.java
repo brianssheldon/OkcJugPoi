@@ -35,8 +35,10 @@ public class PoiUno {
         MakeSomeFormulas makeSomeFormulas = new MakeSomeFormulas();
         makeSomeFormulas.makeSomeFormulasForMe(workbook);
         
-        DualAxisChart dualAxisChart = new DualAxisChart("Dual axis chart");
-        dualAxisChart.makeDualAxisChart(workbook);
+//        DualAxisChart dualAxisChart = new DualAxisChart("Dual axis chart");
+//        dualAxisChart.makeDualAxisChart(workbook);
+         CreateSVGBarChart svg = new CreateSVGBarChart();
+         svg.makeChart(workbook);
         
         try {
             FileOutputStream outputStream = new FileOutputStream("File1.xls");

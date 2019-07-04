@@ -2,8 +2,13 @@ package org.bubba.okcjugpoi;
 
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import org.apache.poi.ss.usermodel.ClientAnchor;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFClientAnchor;
 import org.apache.poi.xssf.usermodel.XSSFDrawing;
 import org.apache.poi.xssf.usermodel.XSSFPicture;
@@ -11,6 +16,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
+import org.jfree.chart.ChartUtils;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.AxisLocation;
 import org.jfree.chart.axis.CategoryAxis;
@@ -86,31 +92,38 @@ public class DualAxisChart extends ApplicationFrame {
         my_anchor.setRow1(5);
         /* Invoke createPicture and pass the anchor point and ID */
 
-//        ByteArrayOutputStream chart_out = new ByteArrayOutputStream();
-//        byte[] imageInByte = null;
-//        try {
-////            ChartUtilities.writeChartAsPNG(chart_out, barChartObject, width, height);
-//            BufferedImage bi = barChartObject.createBufferedImage(WIDTH, height);
-            Image img = chartPanel.createImage(WIDTH, HEIGHT);
-//            BufferedImage bi = new BufferedImage(500, WIDTH, HEIGHT);
-//            bi.getGraphics().drawImage(img, WIDTH, HEIGHT, this);
-//            Graphics2D createGraphics = bi.createGraphics();
-//            createGraphics.
-//            
-//            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-////            ImageIO.write(img., "png", baos);
-//            baos.flush();
-//            imageInByte = baos.toByteArray();
-//            baos.close();
-//        } catch (IOException ex) {
-//            Logger.getLogger(MakeBarChart.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        ByteArrayOutputStream chart_out = new ByteArrayOutputStream();
+        byte[] imageInByte = null;
+        try {
+//            ChartUtils.writeChartAsPNG(chart_out, barChartObject, WIDTH, HEIGHT);
+//            BufferedImage bi = barChartObject.createBufferedImage(WIDTH, HEIGHT);
 
-        int my_picture_id = my_workbook.addPicture(img, Workbook.PICTURE_TYPE_PNG);
-        XSSFPicture my_picture = drawing.createPicture(my_anchor, my_picture_id);
+//            Image img = chartPanel.createImage(WIDTH, HEIGHT);
+            BufferedImage bi = chartPanel.getChart().createBufferedImage(WIDTH, HEIGHT);
+
+            ImageIO.write(bi, "png", chart_out);
+            chart_out.flush();
+            imageInByte = chart_out.toByteArray();
+            chart_out.close();
+        } catch (IOException ex) {
+            Logger.getLogger(MakeBarChart.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        /* Create the drawing container */
+//        XSSFDrawing drawing = my_sheet.createDrawingPatriarch();
+        /* Create an anchor point */
+//        ClientAnchor my_anchor = new XSSFClientAnchor();
+//        /* Define top left corner, and we can resize picture suitable from there */
+//        my_anchor.setCol1(4);
+//        my_anchor.setRow1(5);
+        /* Invoke createPicture and pass the anchor point and ID */
+//        XSSFPicture my_picture = drawing.createPicture(my_anchor, my_picture_id);
         /* Call resize method, which resizes the image */
-        my_picture.resize();
-
+//        my_picture.resize();
+//        int my_picture_id = my_workbook.addPicture(imageInByte, Workbook.PICTURE_TYPE_PNG);
+//        XSSFPicture my_picture = drawing.createPicture(my_anchor, my_picture_id);
+//        /* Call resize method, which resizes the image */
+//        my_picture.resize();
     }
 
     // ****************************************************************************
