@@ -39,6 +39,9 @@ public class PoiUno {
 //        dualAxisChart.makeDualAxisChart(workbook);
          CreateSVGBarChart svg = new CreateSVGBarChart();
          svg.makeChart(workbook);
+         
+         SVGPieChart pie = new SVGPieChart();
+         pie.makeChart(workbook);
         
         try {
             FileOutputStream outputStream = new FileOutputStream("File1.xls");

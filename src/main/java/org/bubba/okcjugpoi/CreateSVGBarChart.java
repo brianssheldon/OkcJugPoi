@@ -36,8 +36,6 @@ import org.jfree.graphics2d.svg.SVGUtils;
 
 public class CreateSVGBarChart {
 
-    public CreateSVGBarChart() {}
-
     public void makeChart(XSSFWorkbook my_workbook) {
         
         XSSFSheet dataSheet = my_workbook.getSheet("A Bunch Of Data");
