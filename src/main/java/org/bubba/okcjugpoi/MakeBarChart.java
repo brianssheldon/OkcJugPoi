@@ -84,7 +84,7 @@ public class MakeBarChart {
                 } else if (cell.getCellType().equals(CellType.STRING)) {
                     chart_label = cell.getStringCellValue();
                 }
-                System.err.println("aaaaa" + chart_label + " " + chart_data);
+//                System.err.println("aaaaa" + chart_label + " " + chart_data);
             }
             /* Add data to the data set */
  /* We don't have grouping in the bar chart, so we put them in fixed group */
