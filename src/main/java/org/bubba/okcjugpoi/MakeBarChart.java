@@ -27,6 +27,8 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.CategoryAxis;
+import org.jfree.chart.axis.CategoryLabelPositions;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
@@ -96,7 +98,7 @@ public class MakeBarChart {
                 } else if (cell.getCellType().equals(CellType.STRING)) {
                     chart_label = cell.getStringCellValue();
                 }
-                System.err.println("aaaaa" + chart_label + " " + chart_data);
+//                System.err.println("aaaaa" + chart_label + " " + chart_data);
             }
             /* Add data to the data set */
  /* We don't have grouping in the bar chart, so we put them in fixed group */
@@ -233,6 +235,7 @@ public class MakeBarChart {
 //        /* Call resize method, which resizes the image */
 //        my_picture.resize();
 //    }
+
     private String getMeALabel(int j) {
         String x = String.valueOf((char) (j + 65));
         x += x;
