@@ -8,22 +8,25 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import org.apache.poi.hssf.util.HSSFColor.HSSFColorPredefined;
+import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.ClientAnchor;
+import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFClientAnchor;
+import org.apache.poi.xssf.usermodel.XSSFColor;
 import org.apache.poi.xssf.usermodel.XSSFDrawing;
+import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFPicture;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.axis.CategoryAxis;
-import org.jfree.chart.axis.CategoryLabelPositions;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
@@ -46,6 +49,15 @@ public class MakeBarChart {
 
             CellStyle cellStyle = cell.getCellStyle();
             cellStyle.setAlignment(HorizontalAlignment.CENTER);
+//            cellStyle.setBorderLeft(BorderStyle.DASHED);
+//
+//            cellStyle.setFillForegroundColor(HSSFColorPredefined.LIME.getIndex());
+//            cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+//
+//            XSSFFont font = my_workbook.createFont();
+//            font.setColor(HSSFColorPredefined.RED.getIndex());
+//            cellStyle.setFont(font);
+
             cellStyle = cell.getCellStyle();
             cell.setCellStyle(cellStyle);
 // ----------
@@ -221,7 +233,6 @@ public class MakeBarChart {
 //        /* Call resize method, which resizes the image */
 //        my_picture.resize();
 //    }
-
     private String getMeALabel(int j) {
         String x = String.valueOf((char) (j + 65));
         x += x;
