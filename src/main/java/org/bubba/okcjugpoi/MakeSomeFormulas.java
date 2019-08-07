@@ -21,7 +21,7 @@ public class MakeSomeFormulas {
             for(int j = 0; j < 15; j++){
                 row = dataSheet.getRow(i);
                 cell = row.getCell(j);
-                System.err.println("aaa " + i + " " + j + " " + cell.getNumericCellValue() + "--");
+//                System.err.println("aaa " + i + " " + j + " " + cell.getNumericCellValue() + "--");
                 String theNbr = Double.toString(cell.getNumericCellValue());
                 theNbr = theNbr.substring(0, theNbr.length()-2);
                 bi = bi.add(new BigInteger(theNbr));
