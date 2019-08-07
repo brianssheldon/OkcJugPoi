@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.Random;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.CellValue;
+import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -122,5 +124,27 @@ public class PoiUno {
                 cell.setCellStyle(cellStyle);
             }
         }
+        
+        FormulaEvaluator evaluator = workbook.getCreationHelper().createFormulaEvaluator();
+        
+        row = sheet.createRow(100);
+        cell = row.createCell(0);
+        cell.setCellFormula("5*10*2");
+        CellValue cellValue = evaluator.evaluate(cell);
+        System.err.println("1 " + cellValue.getNumberValue());  //1 100.0
+        
+        row = sheet.createRow(101);
+        cell = row.createCell(0);
+        cell.setCellFormula("5*10*2");
+        evaluator.evaluateFormulaCell(cell); 
+        System.out.println("2 " + cell.getCellType());     //2 FORMULA
+        System.out.println("2 " + cell.getCellFormula());  //2 5*10*2
+        
+        row = sheet.createRow(102);
+        cell = row.createCell(0);
+        cell.setCellFormula("5*10*2");
+        evaluator.evaluateInCell(cell); 
+        System.out.println("3 " + cell.getCellType());          //3 NUMERIC
+        System.out.println("3 " + cell.getNumericCellValue());  //3 100.0
     }
 }
