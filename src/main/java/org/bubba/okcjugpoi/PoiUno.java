@@ -71,6 +71,7 @@ public class PoiUno {
 //        sheet.setColumnWidth(0, 5000);
         sheet.setColumnWidth(1, 5000);
         sheet.setColumnWidth(2, 5000);
+        sheet.setColumnWidth(3, 500);
 
         int rowNum = 0;
         System.out.println("Creating excel");
