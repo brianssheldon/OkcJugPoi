@@ -2,6 +2,7 @@ package org.bubba.okcjugpoi;
 
 import java.math.BigInteger;
 import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -30,6 +31,7 @@ public class MakeSomeFormulas {
             dataSheet.getRow(i).createCell(16).setCellFormula(bi.toString());
         }
         dataSheet.createRow(50);
+        dataSheet.createRow(51);
         
         for(int i = 0; i < 15; i++){
 //            for(int j = 0; j < 50; j++){
@@ -40,8 +42,13 @@ public class MakeSomeFormulas {
 //                theNbr = theNbr.substring(0, theNbr.length()-2);
 //                bi = bi.add(new BigInteger(theNbr));
 //            }
+            
             String x = String.valueOf((char) (i + 65));
             dataSheet.getRow(50).createCell(i).setCellFormula("SUM(" + x + "2:" + x + "50)");
+            dataSheet.getRow(51).createCell(i).setCellFormula("AVERAGE(" + x + "2:" + x + "50)");
+            XSSFCellStyle style = (XSSFCellStyle) my_workbook.createCellStyle();
+            style.setDataFormat(my_workbook.createDataFormat().getFormat("0.00"));
+            dataSheet.getRow(51).getCell(i).setCellStyle(style);
         }
     }
 }
